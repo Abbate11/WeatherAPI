@@ -3,13 +3,14 @@
 }
 body {
     font-family: 'Dosis';
-    font-weight: 200;
+    font-weight: 250;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 2em;
-    background-color: var(--purple);
-    padding: 5em
+    background-color: grey;
+    padding: 5em;
+    color: white;
 }
  
 main {
@@ -29,7 +30,7 @@ header {
     align-items: center;
     width: 100%;
     height: 10vh;
-    font-size: 2em;
+    font-size: 6em
 }
 
 .middle {
@@ -40,6 +41,7 @@ header {
     align-items: center;
     width: 100%;
     height: 60vh;
+    border-right: 5px solid black;
 }
 
 .middle-left {
@@ -62,6 +64,7 @@ header {
     align-items: center;
     width: 100%;
     height: 50%;
+    font-size: 1.5em;
 }
 
 .name {
@@ -70,9 +73,10 @@ header {
     justify-content: center;
     align-items: center;
     font-size: 2em;
-    width: 100%;
+    width: 40%;
     height: 20%;
     margin: 1em;
+    border-bottom: 5px solid black;
 }
 
 .date {
@@ -94,6 +98,7 @@ header {
     align-items: center;
     width: 100%;
     height: 50%;
+    font-size: 1.5em;
 }
 
 .TWH {
@@ -137,6 +142,7 @@ footer {
     width: 18%;
     height: 90%;
     border-radius: 3em;
+    box-shadow: 4px 4px 10px black;
 }
 
 aside {
@@ -156,25 +162,35 @@ form {
     justify-content: center;
     gap: .5em;
     width: 100%;
-    height: 10vh;
+    height: 25vh;
 }
 
 form input {
+    font-family: 'Dosis';
+    font-size: 1.5em;
+    background: whitesmoke;
+    border: none;
+    border-radius: 20px;
     width: 80%;
     align-self: center;
+    height: 7vh;
+    box-shadow: 2px 2px 5px black;
 }
 
 form button {
     width: 50%;
     height: 2em;
+    font-family: 'Dosis';
+    font-size: 1.5em;
     align-self: center;
     border-radius: 8px;
     cursor: pointer;
+    padding: 0;
 }
 
 .recent-searches {
     background-color: var(--purple);
     display: flex;
     width: 100%;
-    height: 85vh;
+    height: 65vh;
 }

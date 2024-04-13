@@ -1,0 +1,180 @@
+:root {
+    --purple:  rgb(163, 43, 163);
+}
+body {
+    font-family: 'Dosis';
+    font-weight: 200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+    background-color: var(--purple);
+    padding: 5em
+}
+ 
+main {
+ display: flex;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ background-color: grey;
+ height: 100vh;
+ width: 70%;
+ padding: 1em;
+}
+
+header {
+    background-color: var(--purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    font-size: 2em;
+}
+
+.middle {
+    background-color: var(--purple);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60vh;
+}
+
+.middle-left {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    height: 92%;
+    margin: .5em;
+    padding: 1em;
+    gap: 1em;
+}
+
+.name-date {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.name {
+    background-color: var(--purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    width: 100%;
+    height: 20%;
+    margin: 1em;
+}
+
+.date {
+    background-color: var(--purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    width: 100%;
+    height: 20%;
+    margin: 1em;
+}
+
+.stats {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.TWH {
+    background-color: var(--purple);
+    height: 20%;
+    width: 100%;
+}
+
+
+.middle-right {
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: 95%;
+    margin: .5em;
+}
+
+.middle-right span {
+    font-size: 15em;
+    color: yellow;
+}
+
+
+footer {
+    background-color: var(--purple);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 25vh;
+}
+
+.five-day {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 18%;
+    height: 90%;
+    border-radius: 3em;
+}
+
+aside {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: grey;
+    height: 100vh;
+    width: 30%;
+    padding: 1em;
+    gap: 1em;
+}
+
+form {
+    background-color: var(--purple);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5em;
+    width: 100%;
+    height: 10vh;
+}
+
+form input {
+    width: 80%;
+    align-self: center;
+}
+
+form button {
+    width: 50%;
+    height: 2em;
+    align-self: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.recent-searches {
+    background-color: var(--purple);
+    display: flex;
+    width: 100%;
+    height: 85vh;
+}

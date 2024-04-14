@@ -24,7 +24,7 @@ main {
 }
 
 header {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,8 +33,12 @@ header {
     font-size: 6em
 }
 
+header p {
+    text-shadow: 2px 2px 5px black;
+}
+
 .middle {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -45,7 +49,7 @@ header {
 }
 
 .middle-left {
-    background-color: aqua;
+    /* background-color: aqua; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -57,7 +61,7 @@ header {
 }
 
 .name-date {
-    background-color: grey;
+    /* background-color: grey; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,7 +72,7 @@ header {
 }
 
 .name {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,8 +83,12 @@ header {
     border-bottom: 5px solid black;
 }
 
+.name p {
+    text-shadow: 2px 2px 5px black;
+}
+
 .date {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,8 +98,12 @@ header {
     margin: 1em;
 }
 
+.date p {
+    text-shadow: 2px 2px 5px black;
+}
+
 .stats {
-    background-color: grey;
+    /* background-color: grey; */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -101,15 +113,19 @@ header {
     font-size: 1.5em;
 }
 
+.stats p {
+    text-shadow: 2px 2px 5px black;
+}
+
 .TWH {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     height: 20%;
     width: 100%;
 }
 
 
 .middle-right {
-    background-color: aqua;
+    /* background-color: aqua; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,13 +135,17 @@ header {
 }
 
 .middle-right span {
+    text-shadow: 2px 2px 5px black;
+}
+
+.middle-right span {
     font-size: 15em;
     color: yellow;
 }
 
 
 footer {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -134,7 +154,7 @@ footer {
 }
 
 .five-day {
-    background-color: aqua;
+    /* background-color: aqua; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -145,10 +165,19 @@ footer {
     box-shadow: 4px 4px 10px black;
 }
 
+.five-day p {
+    text-shadow: 2px 2px 5px black;
+}
+
+.five-day span {
+    color: yellow;
+    text-shadow: 2px 2px 5px black;
+}
+
 aside {
     display: flex;
     flex-wrap: wrap;
-    background-color: grey;
+    /* background-color: grey; */
     height: 100vh;
     width: 30%;
     padding: 1em;
@@ -156,7 +185,7 @@ aside {
 }
 
 form {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -186,10 +215,11 @@ form button {
     border-radius: 8px;
     cursor: pointer;
     padding: 0;
+    background: whitesmoke;
 }
 
 .recent-searches {
-    background-color: var(--purple);
+    /* background-color: var(--purple); */
     display: flex;
     width: 100%;
     height: 65vh;

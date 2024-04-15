@@ -1,26 +1,27 @@
 const apiKey = '1f764b67e18fc39697b1aad8bd0ac0de';
 const citySearchEl = document.querySelector('#city-search');
-const iconContainerEl = document.querySelector('.middle-right')
+const iconContainerEl = document.querySelector('.middle-right');
 const cityNameContainerEl = document.querySelector('.name');
 const dateContainerEl = document.querySelector('.date');
 const statsContainerEl = document.querySelector('.stats');
-const fiveDayContainerEl = document.querySelector('.five-day');
+const fiveDayContainerEl = document.querySelector('.five-day-container');
+const searchBtn = document.querySelector('#search');
+const recentSearches = document.querySelector('.recent-searches');
 
 // Form Submit Handler
 const formSubmitHandler = function (event) {
     event.preventDefault();
 
-    const city = citySearchEl.ariaValueMax.trim();
+    const city = citySearchEl.value.trim();
 
     if (city) {
+        savedCities();
         getCityWeather(city);
-
-        citySearchEl.textContent = '';
-        cityNameContainerEl.textContent = '';
-        iconContainerEl.textContent = '';
-        dateContainerEl.textContent = '';
-        statsContainerEl.textContent = '';
-        fiveDayContainerEl.textContent = '';
+        
+        cityNameContainerEl.innerHTML = '';
+        dateContainerEl.innerHTML = '';
+        statsContainerEl.innerHTML = '';
+        fiveDayContainerEl.innerHTML = '';
     } else {
         alert('You have entered and invalid City name');
     }
@@ -28,7 +29,7 @@ const formSubmitHandler = function (event) {
 
 //get city weather (today)
 const getCityWeather = function (city) {
-    const apiUrl = `api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
 
     fetch(apiUrl) 
         .then(function (response) {
@@ -37,6 +38,7 @@ const getCityWeather = function (city) {
                 response.json().then(function (data) {
                     console.log(data);
                     displayWeather(data, city);
+                    getFiveDayForecast(city);
                 });
             } else {
                 alert(`Error: ${response.statusText}`);
@@ -50,12 +52,13 @@ const getCityWeather = function (city) {
 
 // get 5 day forecast
 const getFiveDayForecast = function(city) {
-    const apiUrl = `api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
 
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data)
+                displayForecast(data)
             })
         } else {
             alert(`Error: ${response.statusText}`);
@@ -67,26 +70,57 @@ const getFiveDayForecast = function(city) {
 
 // display weather 
 const displayWeather = function (data) {
+    
     const date = dayjs().format('MM/DD/YYYY');
+    const todayDate = document.createElement('p')
     const cityNameEl = document.createElement('p');
     const cityTempEl = document.createElement('p');
     const cityWindsEl = document.createElement('p');
     const cityHumidityEl = document.createElement('p');
 
-    cityNameEl.textContent = `${data.name} ${date}`;
+    todayDate.textContent = date;
+    cityNameEl.textContent = `${data.name}`;
     const cityTemp =(data.main.temp - 273.15) * (9 / 5) + 32;
     cityTempEl.textContent = `Temp: ${cityTemp.toFixed(2)} F`;
     cityWindsEl.textContent = `Wind: ${data.wind.speed} MPH`;
     cityHumidityEl.textContent = `Humidity: ${data.main.humidity} %`;
-
-
-    //Append elements to page
+ //Append elements to page
+    cityNameContainerEl.appendChild(cityNameEl);
+    dateContainerEl.appendChild(todayDate);
+    statsContainerEl.appendChild(cityTempEl);
+    statsContainerEl.appendChild(cityWindsEl);
+    statsContainerEl.appendChild(cityHumidityEl);
 }
 
 //Display forecast
 const displayForecast = function (data) {
     for (let i = 1; i <= 5; i++) {
-        
+        const forecastCard = document.createElement('div');
+        forecastCard.setAttribute('class', 'five-day');
+
+        const cityDate = document.createElement('p');
+        const forecastIcon = document.createElement('span')
+        const cityTempEl = document.createElement('p');
+        const cityWindEl = document.createElement('p');
+        const cityHumidityEl = document.createElement('p');
+
+        const date = forecastDate(i)
+
+        cityDate.textContent = `${date}`;
+        const cityTemp = (data.list[i].main.temp - 273.15) * (9 / 5) + 32;
+        cityTempEl.textContent = `Temp: ${cityTemp.toFixed(2)} F`;
+        cityWindEl.textContent = `Wind: ${data.list[i].wind.speed} MPH`;
+        cityHumidityEl.textContent = `Humidity: ${data.list[i].main.humidity} %`;
+        forecastIcon.setAttribute('class', 'material-symbols-outlined');
+        forecastIcon.textContent = 'sunny';
+    
+
+        forecastCard.appendChild(cityDate);
+        forecastCard.appendChild(forecastIcon);
+        forecastCard.appendChild(cityTempEl);
+        forecastCard.appendChild(cityWindEl);
+        forecastCard.appendChild(cityHumidityEl);
+        fiveDayContainerEl.appendChild(forecastCard);
     }
 }
 
@@ -97,3 +131,36 @@ const forecastDate = function (i) {
     let forecastDay = today.add(i, 'day').format('MM/DD/YYYY');
     return forecastDay;
 }
+
+const savedCities = function () {
+    let city = citySearchEl.value;
+    let cityHistory = JSON.parse(localStorage.getItem('cityHistory')) || [];
+    cityHistory.push(city)
+    localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
+    clearHistory(cityHistory);
+}
+   const clearHistory = function (cityHistory) {
+    recentSearches.innerHTML = '';
+
+    cityHistory.forEach(city => {
+        const historyButton = document.createElement('button');
+        historyButton.textContent = city;
+        historyButton.setAttribute('class', 'past');
+        recentSearches.appendChild(historyButton);
+        
+       historyButton.addEventListener('click', (event) => {
+        event.preventDefault()
+        let passedCity = historyButton.textContent
+        getCityWeather(passedCity)
+        cityNameContainerEl.innerHTML = ''
+        dateContainerEl.innerHTML = ''
+        cityNameContainerEl.innerHTML = ''
+        statsContainerEl.innerHTML = ''
+        fiveDayContainerEl.innerHTML = ''
+       })
+    })
+   }
+
+
+//attach on click listener to search button 
+searchBtn.addEventListener('click', formSubmitHandler);

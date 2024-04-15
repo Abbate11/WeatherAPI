@@ -9,3 +9,5 @@ This app allows you to enter the name of any city and get the weather for that d
 ---See MIT license in Repo---
 
 Live Site URL: https://abbate11.github.io/WeatherAPI/
+
+![Screenshot (31)](https://github.com/Abbate11/WeatherAPI/assets/163916459/b77a9891-4614-4664-b0ad-5c54e154b420)

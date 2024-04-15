@@ -55,8 +55,10 @@ const getFiveDayForecast = function(city) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                
+                console.log(data)
             })
+        } else {
+            alert(`Error: ${response.statusText}`);
         }
     })
 }
@@ -64,3 +66,34 @@ const getFiveDayForecast = function(city) {
 
 
 // display weather 
+const displayWeather = function (data) {
+    const date = dayjs().format('MM/DD/YYYY');
+    const cityNameEl = document.createElement('p');
+    const cityTempEl = document.createElement('p');
+    const cityWindsEl = document.createElement('p');
+    const cityHumidityEl = document.createElement('p');
+
+    cityNameEl.textContent = `${data.name} ${date}`;
+    const cityTemp =(data.main.temp - 273.15) * (9 / 5) + 32;
+    cityTempEl.textContent = `Temp: ${cityTemp.toFixed(2)} F`;
+    cityWindsEl.textContent = `Wind: ${data.wind.speed} MPH`;
+    cityHumidityEl.textContent = `Humidity: ${data.main.humidity} %`;
+
+
+    //Append elements to page
+}
+
+//Display forecast
+const displayForecast = function (data) {
+    for (let i = 1; i <= 5; i++) {
+        
+    }
+}
+
+
+// Day js for forecast cards 
+const forecastDate = function (i) {
+    let today = dayjs();
+    let forecastDay = today.add(i, 'day').format('MM/DD/YYYY');
+    return forecastDay;
+}

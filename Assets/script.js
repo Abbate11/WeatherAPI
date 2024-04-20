@@ -7,6 +7,7 @@ const statsContainerEl = document.querySelector('.stats');
 const fiveDayContainerEl = document.querySelector('.five-day-container');
 const searchBtn = document.querySelector('#search');
 const recentSearches = document.querySelector('.recent-searches');
+const weatherIcon = document.querySelector('.material-symbols-outlined');
 
 // Form Submit Handler
 const formSubmitHandler = function (event) {
@@ -78,6 +79,47 @@ const displayWeather = function (data) {
     const cityWindsEl = document.createElement('p');
     const cityHumidityEl = document.createElement('p');
 
+// Switch statement for choosing the corresponding weather Icon    
+    let wIcon = weatherIcon.textContent
+    switch (data.weather[0].icon) {
+        case "01d": wIcon = 'sunny';
+        break
+        case "01n": wIcon = 'clear_night';
+        break;
+        case "02d": wIcon = 'partly_cloudy_day';
+        break;
+        case "02n": wIcon = 'partly_cloudy_night';
+        break;
+        case "03n": wIcon = 'cloud';
+        break;
+        case "04d": wIcon = 'cloud';
+        break;
+        case "04n": wIcon = 'cloud';
+        break;
+        case "09d": wIcon = 'rainy';
+        break;
+        case "09n": wIcon = 'rainy';
+        break;
+        case "10d": wIcon = 'rainy';
+        break;
+        case "10n": wIcon = 'rainy';
+        break;
+        case "11d": wIcon = 'thunderstorm';
+        break;
+        case "11n": wIcon = 'thunderstorm';
+        break;
+        case "13d": wIcon = 'ac_unit';
+        break;
+        case "13n": wIcon = 'ac_unit';
+        break;
+        case "50d": wIcon = 'mist';
+        break;
+        case "50n": wIcon = 'mist';
+        break;
+    }
+
+    console.log(data.weather[0].icon)
+
     todayDate.textContent = date;
     cityNameEl.textContent = `${data.name}`;
     const cityTemp =(data.main.temp - 273.15) * (9 / 5) + 32;
@@ -132,22 +174,24 @@ const forecastDate = function (i) {
     return forecastDay;
 }
 
+// Save recent searches to local storage
 const savedCities = function () {
     let city = citySearchEl.value;
     let cityHistory = JSON.parse(localStorage.getItem('cityHistory')) || [];
     cityHistory.push(city)
     localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
-    clearHistory(cityHistory);
+    displayRecentSearches(cityHistory);
 }
-   const clearHistory = function (cityHistory) {
+   const displayRecentSearches = function (cityHistory) {
     recentSearches.innerHTML = '';
 
+// display recent search buttons
     cityHistory.forEach(city => {
         const historyButton = document.createElement('button');
         historyButton.textContent = city;
         historyButton.setAttribute('class', 'past');
         recentSearches.appendChild(historyButton);
-        
+// Bring up weather data for clicked recent city
        historyButton.addEventListener('click', (event) => {
         event.preventDefault()
         let passedCity = historyButton.textContent

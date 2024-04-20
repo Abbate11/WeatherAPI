@@ -18,7 +18,8 @@ const formSubmitHandler = function (event) {
     if (city) {
         savedCities();
         getCityWeather(city);
-        
+
+        citySearchEl.value = '';
         cityNameContainerEl.innerHTML = '';
         dateContainerEl.innerHTML = '';
         weatherIconContianer.innerHTML = '';
@@ -144,7 +145,7 @@ const displayWeather = function (data) {
 
 //Display forecast
 const displayForecast = function (data) {
-    for (let i = 2; i <= 6; i++) {
+    for (let i = 1; i <= 5; i++) {
         const forecastCard = document.createElement('div');
         forecastCard.setAttribute('class', 'five-day');
 
@@ -249,7 +250,7 @@ const savedCities = function () {
         getCityWeather(passedCity)
         cityNameContainerEl.innerHTML = ''
         dateContainerEl.innerHTML = ''
-        cityNameContainerEl.innerHTML = ''
+        weatherIconContianer.innerHTML = ''
         statsContainerEl.innerHTML = ''
         fiveDayContainerEl.innerHTML = ''
        })

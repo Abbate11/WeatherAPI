@@ -7,7 +7,7 @@ const statsContainerEl = document.querySelector('.stats');
 const fiveDayContainerEl = document.querySelector('.five-day-container');
 const searchBtn = document.querySelector('#search');
 const recentSearches = document.querySelector('.recent-searches');
-const weatherIcon = document.querySelector('.material-symbols-outlined');
+const weatherIconContianer = document.querySelector('.middle-right');
 
 // Form Submit Handler
 const formSubmitHandler = function (event) {
@@ -21,6 +21,7 @@ const formSubmitHandler = function (event) {
         
         cityNameContainerEl.innerHTML = '';
         dateContainerEl.innerHTML = '';
+        weatherIconContianer.innerHTML = '';
         statsContainerEl.innerHTML = '';
         fiveDayContainerEl.innerHTML = '';
     } else {
@@ -78,50 +79,56 @@ const displayWeather = function (data) {
     const cityTempEl = document.createElement('p');
     const cityWindsEl = document.createElement('p');
     const cityHumidityEl = document.createElement('p');
+    const weatherIconEl = document.createElement('span')
 
-// Switch statement for choosing the corresponding weather Icon    
-    let wIcon = weatherIcon.textContent
+// Switch statement for choosing the corresponding weather Icon 
+    weatherIconEl.setAttribute('class', 'material-symbols-outlined');
     switch (data.weather[0].icon) {
-        case "01d": wIcon = 'sunny';
-        break
-        case "01n": wIcon = 'clear_night';
-        break;
-        case "02d": wIcon = 'partly_cloudy_day';
-        break;
-        case "02n": wIcon = 'partly_cloudy_night';
-        break;
-        case "03n": wIcon = 'cloud';
-        break;
-        case "04d": wIcon = 'cloud';
-        break;
-        case "04n": wIcon = 'cloud';
-        break;
-        case "09d": wIcon = 'rainy';
-        break;
-        case "09n": wIcon = 'rainy';
-        break;
-        case "10d": wIcon = 'rainy';
-        break;
-        case "10n": wIcon = 'rainy';
-        break;
-        case "11d": wIcon = 'thunderstorm';
-        break;
-        case "11n": wIcon = 'thunderstorm';
-        break;
-        case "13d": wIcon = 'ac_unit';
-        break;
-        case "13n": wIcon = 'ac_unit';
-        break;
-        case "50d": wIcon = 'mist';
-        break;
-        case "50n": wIcon = 'mist';
-        break;
+        case "01d":
+            wIcon = 'sunny';
+            break;
+        case "01n":
+            wIcon = 'clear_night';
+            break;
+        case "02d":
+            wIcon = 'partly_cloudy_day';
+            break;
+        case "02n":
+            wIcon = 'partly_cloudy_night';
+            break;
+        case "03d":
+        case "03n":
+            wIcon = 'cloud';
+            break;
+        case "04d":
+        case "04n":
+            wIcon = 'cloud';
+            break;
+        case "09d":
+        case "09n":
+        case "10d":
+        case "10n":
+            wIcon = 'rainy';
+            break;
+        case "11d":
+        case "11n":
+            wIcon = 'thunderstorm';
+            break;
+        case "13d":
+        case "13n":
+            wIcon = 'ac_unit';
+            break;
+        case "50d":
+        case "50n":
+            wIcon = 'mist';
+            break;
     }
 
-    console.log(data.weather[0].icon)
+    
 
     todayDate.textContent = date;
     cityNameEl.textContent = `${data.name}`;
+    weatherIconEl.textContent = wIcon;
     const cityTemp =(data.main.temp - 273.15) * (9 / 5) + 32;
     cityTempEl.textContent = `Temp: ${cityTemp.toFixed(2)} F`;
     cityWindsEl.textContent = `Wind: ${data.wind.speed} MPH`;
@@ -129,6 +136,7 @@ const displayWeather = function (data) {
  //Append elements to page
     cityNameContainerEl.appendChild(cityNameEl);
     dateContainerEl.appendChild(todayDate);
+    weatherIconContianer.appendChild(weatherIconEl);
     statsContainerEl.appendChild(cityTempEl);
     statsContainerEl.appendChild(cityWindsEl);
     statsContainerEl.appendChild(cityHumidityEl);
@@ -136,7 +144,7 @@ const displayWeather = function (data) {
 
 //Display forecast
 const displayForecast = function (data) {
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 2; i <= 6; i++) {
         const forecastCard = document.createElement('div');
         forecastCard.setAttribute('class', 'five-day');
 
@@ -148,13 +156,56 @@ const displayForecast = function (data) {
 
         const date = forecastDate(i)
 
+        forecastIcon.setAttribute('class', 'material-symbols-outlined');
+        switch (data.list[i].weather[0].icon) {
+            case "01d":
+                wIcon = 'sunny';
+                break;
+            case "01n":
+                wIcon = 'clear_night';
+                break;
+            case "02d":
+                wIcon = 'partly_cloudy_day';
+                break;
+            case "02n":
+                wIcon = 'partly_cloudy_night';
+                break;
+            case "03d":
+            case "03n":
+                wIcon = 'cloud';
+                break;
+            case "04d":
+            case "04n":
+                wIcon = 'cloud';
+                break;
+            case "09d":
+            case "09n":
+            case "10d":
+            case "10n":
+                wIcon = 'rainy';
+                break;
+            case "11d":
+            case "11n":
+                wIcon = 'thunderstorm';
+                break;
+            case "13d":
+            case "13n":
+                wIcon = 'ac_unit';
+                break;
+            case "50d":
+            case "50n":
+                wIcon = 'mist';
+                break;
+        }
+
+        console.log(data.list[i].weather[0].icon);
+
         cityDate.textContent = `${date}`;
         const cityTemp = (data.list[i].main.temp - 273.15) * (9 / 5) + 32;
         cityTempEl.textContent = `Temp: ${cityTemp.toFixed(2)} F`;
         cityWindEl.textContent = `Wind: ${data.list[i].wind.speed} MPH`;
         cityHumidityEl.textContent = `Humidity: ${data.list[i].main.humidity} %`;
-        forecastIcon.setAttribute('class', 'material-symbols-outlined');
-        forecastIcon.textContent = 'sunny';
+        forecastIcon.textContent = wIcon;
     
 
         forecastCard.appendChild(cityDate);

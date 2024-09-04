@@ -146,7 +146,8 @@ const displayWeather = function (data) {
 
 //Display forecast
 const displayForecast = function (data) {
-    for (let i = 1; i <= 5; i++) {
+    for (let index = 0; i < 5; i++) {
+        let i = index * 8 + 5;
         const forecastCard = document.createElement('div');
         forecastCard.setAttribute('class', 'five-day');
 

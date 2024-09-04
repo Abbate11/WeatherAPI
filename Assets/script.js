@@ -146,8 +146,8 @@ const displayWeather = function (data) {
 
 //Display forecast
 const displayForecast = function (data) {
-    for (let index = 0; i < 5; i++) {
-        let i = index * 8 + 5;
+    for (let i = 0; i < 5; i++) {
+        let index = i * 8 + 5;
         const forecastCard = document.createElement('div');
         forecastCard.setAttribute('class', 'five-day');
 
@@ -160,7 +160,7 @@ const displayForecast = function (data) {
         const date = forecastDate(i)
 
         forecastIcon.setAttribute('class', 'material-symbols-outlined');
-        switch (data.list[i].weather[0].icon) {
+        switch (data.list[index].weather[0].icon) {
             case "01d":
                 wIcon = 'sunny';
                 break;
@@ -201,13 +201,13 @@ const displayForecast = function (data) {
                 break;
         }
 
-        console.log(data.list[i].weather[0].icon);
+        console.log(data.list[index].weather[0].icon);
 
         cityDate.textContent = `${date}`;
-        const cityTemp = (data.list[i].main.temp - 273.15) * (9 / 5) + 32;
+        const cityTemp = (data.list[index].main.temp - 273.15) * (9 / 5) + 32;
         cityTempEl.textContent = `Temp: ${cityTemp.toFixed(2)} F`;
-        cityWindEl.textContent = `Wind: ${data.list[i].wind.speed} MPH`;
-        cityHumidityEl.textContent = `Humidity: ${data.list[i].main.humidity} %`;
+        cityWindEl.textContent = `Wind: ${data.list[index].wind.speed} MPH`;
+        cityHumidityEl.textContent = `Humidity: ${data.list[index].main.humidity} %`;
         forecastIcon.textContent = wIcon;
     
 

@@ -157,7 +157,7 @@ const displayForecast = function (data) {
         const cityWindEl = document.createElement('p');
         const cityHumidityEl = document.createElement('p');
 
-        const date = forecastDate(i)
+        const date = forecastDate(i + 1)
 
         forecastIcon.setAttribute('class', 'material-symbols-outlined');
         switch (data.list[index].weather[0].icon) {

@@ -59,6 +59,7 @@ const getFiveDayForecast = function(city) {
 
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
+            console.log(response);
             response.json().then(function (data) {
                 console.log(data)
                 displayForecast(data)
